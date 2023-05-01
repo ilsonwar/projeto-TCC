@@ -65,3 +65,8 @@ function showAuth() {
   hideItem(userContent)
   showItem(auth)
 }
+
+// Atributos extras de configuração de e-mail
+let actionCodeSettings = {
+  url: 'http://127.0.0.1:5500/'
+}

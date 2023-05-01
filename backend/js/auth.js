@@ -1,3 +1,6 @@
+//Traduz para portugues o e-mail de verificação
+firebase.auth().languageCode = "pt-BR";
+
 // Função que trata a submissão do formulário de autenticação
 authForm.onsubmit = function (event) {
   showItem(loading);
@@ -52,7 +55,7 @@ function sendEmailVerification() {
   showItem(loading);
   var user = firebase.auth().currentUser;
   user
-    .sendEmailVerification()
+    .sendEmailVerification(actionCodeSettings)
     .then(function () {
       alert(
         "E-mail de verificação foi enviado para " +
