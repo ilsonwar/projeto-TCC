@@ -24,51 +24,51 @@
 
     <!--Conteúdo destinado para usuários não autenticados-->
 
-      <!--Formulário de autenticação-->
-      <div id="auth">
-        <form id="authForm">
-          <div class="form">
-            <div class="col1">
-              <label for="email">Email</label>
-              <br />
-              <input type="email" id="email" name="email" placeholder="exemplo@email.com" />
-            </div>
-            <div class="col2">
-              <label for="password">Senha </label>
-              <br />
-              <input type="password" placeholder="Senha " id="password" />
-            </div>
+    <!--Formulário de autenticação-->
+    <div id="auth">
+      <form id="authForm">
+        <div class="form">
+          <div class="col1">
+            <label for="email">Email</label>
+            <br />
+            <input type="email" id="email" name="email" placeholder="exemplo@email.com" />
           </div>
+          <div class="col2">
+            <label for="password">Senha </label>
+            <br />
+            <input type="password" placeholder="Senha " id="password" />
+          </div>
+        </div>
 
-          <!--Redefinição de senha-->
-          <p id="passwordReset">
-            Esqueceu sua <a onclick="sendPasswordResetEmail()">senha?</a>
-          </p>
+        <!--Redefinição de senha-->
+        <p id="passwordReset">
+          Esqueceu sua <a onclick="sendPasswordResetEmail()">senha?</a>
+        </p>
 
-          <button class="login-btn" type="submit" id="submitAuthForm">
-            LOGIN
-          </button>
-
-          <!--Alternar o fomulário de autenticação para o cadastro de novas contas-->
-          <p id="register">Ainda não possui uma conta? <a onclick="toggleToRegister()">Cadastre-se</a></p>
-          </p>
-
-          <!--Alternar o fomulário de autenticação para o acesso de contas já existentes-->
-          <p id="access" class="startHidden">
-            Já possui uma conta?
-            <a onclick="toggleToAccess()">Acesse a sua conta</a>
-          </p>
-        </form>
-
-        <button onclick="signInWithGoogle()" class="google-btn">
-          <img src="./frontend/assets/images/icons/google-ico.svg" alt="Autenticação pelo Google">
-          <p>Entrar com google</p>
+        <button class="login-btn" type="submit" id="submitAuthForm">
+          LOGIN
         </button>
-          
+
+        <!--Alternar o fomulário de autenticação para o cadastro de novas contas-->
+        <p id="register">Ainda não possui uma conta? <a onclick="toggleToRegister()">Cadastre-se</a></p>
+        </p>
+
+        <!--Alternar o fomulário de autenticação para o acesso de contas já existentes-->
+        <p id="access" class="startHidden">
+          Já possui uma conta?
+          <a onclick="toggleToAccess()">Acesse a sua conta</a>
+        </p>
+      </form>
+
+      <button onclick="signInWithGoogle()" class="google-btn">
+        <img src="./frontend/assets/images/icons/google-ico.svg" alt="Autenticação pelo Google">
+        <p>Entrar com google</p>
+      </button>
+
     </div>
 
-     <!--Conteúdo destinado para usuários autenticados-->
-     <div id="userContent" class="startHidden">
+    <!--Conteúdo destinado para usuários autenticados-->
+    <div id="userContent" class="startHidden">
       <hr />
       <div id="userInfo" class="center">
         <div class="center user">
@@ -82,22 +82,25 @@
             Verificar e-mail
           </button>
         </div>
+        <button class="alternative" onclick="updateUserName()">
+          Atualizar meu nome
+        </button>
 
         <button class="alternative" onclick="signOut()">Sair</button>
 
       </div>
 
-  </div>
+    </div>
 
-  <!--Recursos do Firebase-->
-  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+    <!--Recursos do Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
 
 
-  <!--Nossa programação em JavaScript-->
-  <script src="./backend/js/firebase.js"></script>
-  <script src="./backend/js/utils.js"></script>
-  <script src="./backend/js/auth.js"></script>
+    <!--Nossa programação em JavaScript-->
+    <script src="./backend/js/firebase.js"></script>
+    <script src="./backend/js/utils.js"></script>
+    <script src="./backend/js/auth.js"></script>
 
 </body>
 
