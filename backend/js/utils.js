@@ -3,6 +3,13 @@ let authForm = document.getElementById("authForm");
 let register = document.getElementById("register");
 let access = document.getElementById("access");
 
+let loading = document.getElementById('loading')
+
+let auth = document.getElementById('auth')
+let userContent = document.getElementById('userContent')
+
+let userEmail = document.getElementById('userEmail')
+
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = 'CADASTRE-SE'
@@ -31,3 +38,17 @@ function hideItem(element) {
   element.style.display = "none";
 }
 
+// Mostrar conteúdo para usuários autenticados
+function showUserContent(user) {
+  userEmail.innerHTML = user.email
+  hideItem(auth)
+  showItem(userContent)
+}
+
+// Mostrar conteúdo para usuários não autenticados
+function showAuth() {
+  authForm.email.value = ''
+  authForm.password.value = ''
+  hideItem(userContent)
+  showItem(auth)
+}
