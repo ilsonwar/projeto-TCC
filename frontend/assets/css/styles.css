@@ -1,0 +1,130 @@
+body {
+  color: #444;
+  font-family: Tahoma;
+  display: flex;
+  height: 96vh;
+}
+
+#app {
+  width: 512px;
+  max-height: 100vh;
+  margin: auto;
+  box-shadow: 4px 4px 20px #888;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+}
+
+.startHidden {
+  display: none;
+}
+
+h3 {
+  margin: 4px;
+  font-weight: normal;
+}
+
+input {
+  width: 80%;
+  margin: 4px;
+  padding: 4px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+button {
+  background-color: #4c4;
+  font-size: 15px;
+  color: white;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+}
+
+.alternative {
+  background-color: #44c;
+}
+
+.danger {
+  background-color: #c44;
+}
+
+#loading {
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+  z-index: 1;
+}
+
+#auth img {
+  cursor: pointer;
+}
+
+#auth img:hover {
+  opacity: 0.75;
+}
+
+#userImg {
+  height: 40px;
+  border-radius: 100%;
+}
+
+#todoList {
+  overflow-y: auto;
+}
+
+ul{
+  list-style-type: none;
+  padding: 0;
+  overflow-y: auto;
+  max-height: 150px; /* altura máxima desejada */
+}
+
+li{
+  padding: 6px;
+  background-color: var(--cor-2) ;
+  border-bottom: 1px solid #ddd;
+  display: grid;
+  grid-template-columns: 8fr 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+li:hover{
+  background-color: var(--cor-3);
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.todoBtn{
+  margin: 0 0 0 4px;
+}
+
+.todoBtn:hover{
+  transform: scale(1.2);
+}
+
+.user{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}

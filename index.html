@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>TCC</title>
+
+  <link rel="stylesheet" href="./frontend/assets/css/style.css" />
+</head>
+
+
+<body>
+  <div id="app">
+    <!--Logotipo-->
+    <div class="title-auth">
+      <img class="pig" src="./frontend/assets/images/icons/pig-ico.svg" alt="icon-pig" />
+      <h1 id="title">Olá, bem vindo de volta</h1>
+    </div>
+
+    <!--Conteúdo destinado para usuários não autenticados-->
+
+      <!--Formulário de autenticação-->
+      <div id="auth">
+        <form id="authForm">
+          <div class="form">
+            <div class="col1">
+              <label for="email">Email</label>
+              <br />
+              <input type="email" id="email" name="email" placeholder="exemplo@email.com" />
+            </div>
+            <div class="col2">
+              <label for="password">Senha </label>
+              <br />
+              <input type="password" placeholder="Senha " id="password" />
+            </div>
+          </div>
+
+          <button class="login-btn" type="submit" id="submitAuthForm">
+            LOGIN
+          </button>
+
+          <!--Alternar o fomulário de autenticação para o cadastro de novas contas-->
+          <p id="register">Ainda não possui uma conta? <a onclick="toggleToRegister()">Cadastre-se</a></p>
+          </p>
+
+          <!--Alternar o fomulário de autenticação para o acesso de contas já existentes-->
+          <p id="access" class="startHidden">
+            Já possui uma conta?
+            <a onclick="toggleToAccess()">Acesse a sua conta</a>
+          </p>
+        </form>
+          
+    </div>
+
+  </div>
+
+  <!--Recursos do Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+
+
+  <!--Nossa programação em JavaScript-->
+  <script src="./backend/js/firebase.js"></script>
+  <script src="./backend/js/utils.js"></script>
+
+</body>
+
+</html>
