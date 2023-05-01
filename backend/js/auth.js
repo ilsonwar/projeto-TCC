@@ -97,3 +97,16 @@ function sendPasswordResetEmail() {
     alert("É preciso preencher o campo de e-mail para redefinir a senha!");
   }
 }
+
+// Função que permite a autenticação pelo Google
+function signInWithGoogle() {
+  showItem(loading);
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .catch(function (error) {
+      alert("Houve um erro ao autenticar usando o Google");
+      console.log(error);
+      hideItem(loading);
+    });
+}

@@ -17,6 +17,9 @@ let emailVerified = document.getElementById("emailVerified");
 
 let passwordReset = document.getElementById("passwordReset");
 
+let userName = document.getElementById('userName')
+let userImg = document.getElementById('userImg')
+
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = 'CADASTRE-SE'
@@ -55,6 +58,9 @@ function showUserContent(user) {
     showItem(sendEmailVerificationDiv);
     title.innerHTML = "Verifique seu e-mail";
   }
+  userImg.src = user.photoURL ? user.photoURL : '../../frontend/assets/images/unknownUser.png'
+  userName.innerHTML = user.displayName
+  userEmail.innerHTML = user.email
   userEmail.innerHTML = user.email
   hideItem(auth)
   showItem(userContent)

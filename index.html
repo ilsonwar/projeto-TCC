@@ -59,6 +59,11 @@
             <a onclick="toggleToAccess()">Acesse a sua conta</a>
           </p>
         </form>
+
+        <button onclick="signInWithGoogle()" class="google-btn">
+          <img src="./frontend/assets/images/icons/google-ico.svg" alt="Autenticação pelo Google">
+          <p>Entrar com google</p>
+        </button>
           
     </div>
 
@@ -67,6 +72,8 @@
       <hr />
       <div id="userInfo" class="center">
         <div class="center user">
+          <img id="userImg" />
+          <p id="userName"></p>
           <p id="userEmail"></p>
           <p id="emailVerified"></p>
         </div>
