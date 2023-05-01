@@ -10,6 +10,11 @@ let userContent = document.getElementById('userContent')
 
 let userEmail = document.getElementById('userEmail')
 
+let sendEmailVerificationDiv = document.getElementById(
+  "sendEmailVerificationDiv"
+);
+let emailVerified = document.getElementById("emailVerified");
+
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = 'CADASTRE-SE'
@@ -40,6 +45,14 @@ function hideItem(element) {
 
 // Mostrar conteúdo para usuários autenticados
 function showUserContent(user) {
+  if (user.emailVerified) {
+    emailVerified.innerHTML = "E-mail verificado";
+    hideItem(sendEmailVerificationDiv);
+  } else {
+    emailVerified.innerHTML = "E-mail não verificado";
+    showItem(sendEmailVerificationDiv);
+    title.innerHTML = "Verifique seu e-mail";
+  }
   userEmail.innerHTML = user.email
   hideItem(auth)
   showItem(userContent)
