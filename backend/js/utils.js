@@ -15,12 +15,14 @@ let sendEmailVerificationDiv = document.getElementById(
 );
 let emailVerified = document.getElementById("emailVerified");
 
+let passwordReset = document.getElementById("passwordReset");
+
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = 'CADASTRE-SE'
   hideItem(register)
   showItem(access)
-
+  hideItem(passwordReset);
 }
 
 // Alterar o formulário de autenticação para o acesso de contas já existentes
@@ -28,7 +30,7 @@ function toggleToAccess() {
   authForm.submitAuthForm.innerHTML = 'LOGIN'
   hideItem(access)
   showItem(register)
-
+  showItem(passwordReset);
 }
 
 toggleToAccess();
