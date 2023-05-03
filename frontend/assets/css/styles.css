@@ -6,7 +6,7 @@ body {
 }
 
 #app {
-  width: 512px;
+  width: 400px;
   max-height: 100vh;
   margin: auto;
   box-shadow: 4px 4px 20px #888;
@@ -26,16 +26,6 @@ body {
 h3 {
   margin: 4px;
   font-weight: normal;
-}
-
-input {
-  width: 80%;
-  margin: 4px;
-  padding: 4px;
-  font-size: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
 }
 
 button {
