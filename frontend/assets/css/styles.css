@@ -121,3 +121,28 @@ li:hover{
   gap: 20px;
   justify-content: center;
 }
+
+@media (max-width: 600px) {
+
+  #app{
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    margin: auto;
+    padding: 0;
+
+  }
+
+  #title{
+    font-size: 1.6rem;
+  }
+
+  /* .title-auth{
+    margin-top: 60px;
+  } */
+
+  .container-app{
+    margin: auto;
+  }
+}

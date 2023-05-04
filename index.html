@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TCC</title>
 
   <link rel="stylesheet" href="./frontend/assets/css/style.css" />
@@ -11,59 +12,62 @@
 
 <body>
   <div id="app">
-    <!--Logotipo-->
-    <div class="title-auth">
-      <img class="pig" src="./frontend/assets/images/icons/pig-ico.svg" alt="icon-pig" />
-      <h1 id="title">Olá, bem vindo de volta</h1>
-    </div>
+    <div class="container-app">
 
-    <!-- FeedBrack de carregamento -->
-    <div id="loading">
-      <img src="./frontend/assets/images/loading.gif" />
-    </div>
+      <!--Logotipo-->
+      <div class="title-auth">
+        <img class="pig" src="./frontend/assets/images/icons/pig-ico.svg" alt="icon-pig" />
+        <h1 id="title">Olá, bem vindo de volta</h1>
+      </div>
 
-    <!--Conteúdo destinado para usuários não autenticados-->
+      <!-- FeedBrack de carregamento -->
+      <div id="loading">
+        <img src="./frontend/assets/images/loading.gif" />
+      </div>
 
-    <!--Formulário de autenticação-->
-    <div id="auth">
-      <form id="authForm">
-        <div class="form">
-          <div class="form-container">
-            <div class="form-control">
-              <input id="email" type="text" required>
-              <label>Email</label>
-            </div>
+      <!--Conteúdo destinado para usuários não autenticados-->
 
-            <div class="form-control">
-              <input id="password" type="password" required>
-              <label>Password</label>
+      <!--Formulário de autenticação-->
+      <div id="auth">
+        <form id="authForm">
+          <div class="form">
+            <div class="form-container">
+              <div class="form-control">
+                <input id="email" type="text" required>
+                <label>Email</label>
+              </div>
+
+              <div class="form-control">
+                <input id="password" type="password" required>
+                <label>Password</label>
+              </div>
             </div>
           </div>
-        </div>
-        <!--Redefinição de senha-->
-        <div class="login-container">
-          <p id="passwordReset">
-            Esqueceu sua <a onclick="sendPasswordResetEmail()">senha?</a>
-          </p>
-          <button class="login-btn" type="submit" id="submitAuthForm">
-            LOGIN
-          </button>
-          <!--Alternar o fomulário de autenticação para o cadastro de novas contas-->
-          <p id="register">Ainda não possui uma conta? <a onclick="toggleToRegister()">Cadastre-se</a></p>
-          </p>
-          <!--Alternar o fomulário de autenticação para o acesso de contas já existentes-->
-          <p id="access" class="startHidden">
-            Já possui uma conta?
-            <a onclick="toggleToAccess()">Acesse a sua conta</a>
-          </p>
-        </div>
-      </form>
+          <!--Redefinição de senha-->
+          <div class="login-container">
+            <p id="passwordReset">
+              Esqueceu sua <a onclick="sendPasswordResetEmail()">senha?</a>
+            </p>
+            <button class="login-btn" type="submit" id="submitAuthForm">
+              LOGIN
+            </button>
+            <!--Alternar o fomulário de autenticação para o cadastro de novas contas-->
+            <p id="register">Ainda não possui uma conta? <a onclick="toggleToRegister()">Cadastre-se</a></p>
+            </p>
+            <!--Alternar o fomulário de autenticação para o acesso de contas já existentes-->
+            <p id="access" class="startHidden">
+              Já possui uma conta?
+              <a onclick="toggleToAccess()">Acesse a sua conta</a>
+            </p>
+          </div>
+        </form>
 
-      <button onclick="signInWithGoogle()" class="google-btn">
-        <img src="./frontend/assets/images/icons/google-ico.svg" alt="Autenticação pelo Google">
-        <p>Entrar com google</p>
-      </button>
+        <button onclick="signInWithGoogle()" class="google-btn">
+          <img src="./frontend/assets/images/icons/google-ico.svg" alt="Autenticação pelo Google">
+          <p>Entrar com google</p>
+        </button>
 
+      </div>
     </div>
 
     <!--Conteúdo destinado para usuários autenticados-->
