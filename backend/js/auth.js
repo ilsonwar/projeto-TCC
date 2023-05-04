@@ -10,9 +10,7 @@ authForm.onsubmit = function (event) {
       .auth()
       .signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
       .catch(function (error) {
-        console.log("Falha no acesso");
-        console.log(error);
-        hideItem(loading);
+        showError('Falha no acesso: ', error)
       });
   } else {
     firebase
@@ -22,9 +20,7 @@ authForm.onsubmit = function (event) {
         authForm.password.value
       )
       .catch(function (error) {
-        console.log("Falha no cadastro");
-        console.log(error);
-        hideItem(loading);
+        showError('Falha no cadastro: ', error)
       });
   }
 };
@@ -45,8 +41,7 @@ function signOut() {
     .auth()
     .signOut()
     .catch(function (error) {
-      console.log("Falha ao sair da conta");
-      console.log(error);
+      showError('Falha ao sair da conta: ', error)
     });
 }
 
@@ -64,8 +59,7 @@ function sendEmailVerification() {
       );
     })
     .catch(function (error) {
-      alert("Houve um erro ao enviar o e-mail de verificação");
-      console.log(error);
+      showError('Falha ao enviar mensagem de verificação de e-mail: ', error)
     })
     .finally(function () {
       hideItem(loading);
@@ -87,8 +81,7 @@ function sendPasswordResetEmail() {
         alert("E-mail de redefinição de senha foi enviado para " + email + ".");
       })
       .catch(function (error) {
-        alert("Houve um erro ao enviar e-mail de redefinição de senha!");
-        console.log(error);
+        showError('Falha ao enviar e-mail de redefinição de senha: ', error)
       })
       .finally(function () {
         hideItem(loading);
@@ -105,8 +98,7 @@ function signInWithGoogle() {
     .auth()
     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .catch(function (error) {
-      alert("Houve um erro ao autenticar usando o Google");
-      console.log(error);
+      showError('Falha ao autenticar com o Google: ', error)
       hideItem(loading);
     });
 }
@@ -120,8 +112,7 @@ function updateUserName() {
     firebase.auth().currentUser.updateProfile({
       displayName: newUserName
     }).catch(function (error) {
-      alert('Houve um erro ao atualizar o nome de usuário')
-      console.log(error)
+      showError('Falha ao atualizar o nome de usuário: ', error)
     }).finally(function () {
       hideItem(loading)
     })
@@ -138,8 +129,7 @@ function deleteUserAccount() {
     firebase.auth().currentUser.delete().then(function () {
       alert('Conta foi removida com sucesso')
     }).catch(function (error) {
-      alert('Houve um erro ao remover a sua conta')
-      console.log(error)
+      showError('Falha ao deletar sua conta: ', error)
     }).finally(function () {
       hideItem(loading)
     })
