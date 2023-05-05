@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
 main {
   display: grid;
@@ -8,7 +8,6 @@ main {
 
 a {
   text-decoration: underline;
-  ;
   color: var(--cor-p1);
 }
 
@@ -43,14 +42,13 @@ a {
   justify-items: center;
 }
 
-
 .form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.login-container{
+.login-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -68,7 +66,7 @@ a {
   background-color: var(--cor-p1);
   color: var(--cor-1);
 
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -90,18 +88,18 @@ a {
   color: var(--cor-5);
   cursor: pointer;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 200;
   font-size: 20px;
   line-height: 28px;
 }
 
-.google-btn p{
+.google-btn p {
   cursor: pointer;
 }
 
-#sendEmailVerificationDiv{
+#sendEmailVerificationDiv {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -109,7 +107,7 @@ a {
   text-align: center;
 }
 
-#sendEmailVerificationDiv button{
+#sendEmailVerificationDiv button {
   width: 300px;
   height: 50px;
   align-items: center;
@@ -120,13 +118,12 @@ a {
   color: var(--cor-1);
   margin-bottom: 10px;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
 }
-
 
 /* Responsável pela animação no login */
 .btn:focus {

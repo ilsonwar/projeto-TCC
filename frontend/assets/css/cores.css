@@ -1,25 +1,25 @@
 :root {
-  --cor-0: #FFFFFF;
-  --cor-1: #F7F7F7;
-  --cor-2: #EDEDED;
-  --cor-3: #DEDEDE;
-  --cor-4: #CCCCCC;
-  --cor-5: #B2B2B2;
-  --cor-6: #9C9C9C;
+  --cor-0: #ffffff;
+  --cor-1: #f7f7f7;
+  --cor-2: #ededed;
+  --cor-3: #dedede;
+  --cor-4: #cccccc;
+  --cor-5: #b2b2b2;
+  --cor-6: #9c9c9c;
   --cor-7: #717171;
   --cor-8: #595959;
   --cor-9: #404040;
-  --cor-10: #2E2E2E;
+  --cor-10: #2e2e2e;
   --cor-11: #111111;
   --cor-12: #000000;
   /* CORES UTILIZADAS */
-  --cor-p1: #18B53B;
-  --cor-p2: #0D932B;
+  --cor-p1: #18b53b;
+  --cor-p2: #0d932b;
   --cor-p3: #136324;
-  --cor-p4: #8AF67C;
-  --cor-p5: #58D15D;
-  --cor-p6: #5FD241;
-  --cor-p7: #A0E712;
+  --cor-p4: #8af67c;
+  --cor-p5: #58d15d;
+  --cor-p6: #5fd241;
+  --cor-p7: #a0e712;
 }
 
 .cor-0 {

@@ -94,7 +94,25 @@
         <button class="danger" onclick="deleteUserAccount()">
           Excluir minha conta
         </button>
+        <hr>
 
+        <!--Lista de tarefas do usuário-->
+        <div id="todoList">
+          <h3 id="todoCount">Carregando tarefas...</h3>
+          <ul id="ulTodoList"></ul>
+        </div>
+
+        <hr>
+
+        <div class="center">
+          <!--Formulário de tarefas-->
+          <form id="todoForm">
+            <h3 id="todoFormTitle">Adicionar lote:</h3>
+            <label for="name">Tarefa: </label>
+            <input type="date" id="dataLote" placeholder="Tarefa">
+            <button type="submit" id="submitTodoForm">Adicionar tarefa</button>
+          </form>
+        </div>
       </div>
 
     </div>
@@ -102,12 +120,14 @@
     <!--Recursos do Firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
 
 
     <!--Nossa programação em JavaScript-->
     <script src="./backend/js/firebase.js"></script>
     <script src="./backend/js/utils.js"></script>
     <script src="./backend/js/auth.js"></script>
+    <script src="./backend/js/lote.js"></script>
 
 </body>
 

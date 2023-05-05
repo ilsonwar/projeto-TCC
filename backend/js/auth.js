@@ -10,7 +10,7 @@ authForm.onsubmit = function (event) {
       .auth()
       .signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
       .catch(function (error) {
-        showError('Falha no acesso: ', error)
+        showError("Falha no acesso: ", error);
       });
   } else {
     firebase
@@ -20,7 +20,7 @@ authForm.onsubmit = function (event) {
         authForm.password.value
       )
       .catch(function (error) {
-        showError('Falha no cadastro: ', error)
+        showError("Falha no cadastro: ", error);
       });
   }
 };
@@ -41,7 +41,7 @@ function signOut() {
     .auth()
     .signOut()
     .catch(function (error) {
-      showError('Falha ao sair da conta: ', error)
+      showError("Falha ao sair da conta: ", error);
     });
 }
 
@@ -59,7 +59,7 @@ function sendEmailVerification() {
       );
     })
     .catch(function (error) {
-      showError('Falha ao enviar mensagem de verificação de e-mail: ', error)
+      showError("Falha ao enviar mensagem de verificação de e-mail: ", error);
     })
     .finally(function () {
       hideItem(loading);
@@ -81,7 +81,7 @@ function sendPasswordResetEmail() {
         alert("E-mail de redefinição de senha foi enviado para " + email + ".");
       })
       .catch(function (error) {
-        showError('Falha ao enviar e-mail de redefinição de senha: ', error)
+        showError("Falha ao enviar e-mail de redefinição de senha: ", error);
       })
       .finally(function () {
         hideItem(loading);
@@ -98,50 +98,65 @@ function signInWithGoogle() {
     .auth()
     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .catch(function (error) {
-      showError('Falha ao autenticar com o Google: ', error)
+      showError("Falha ao autenticar com o Google: ", error);
       hideItem(loading);
     });
 }
 
 // Função que permite atualizar nomes de usuários
 function updateUserName() {
-  var newUserName = prompt('Informe um novo nome de usuário.', userName.innerHTML)
-  if (newUserName && newUserName != '') {
-    userName.innerHTML = newUserName
-    showItem(loading)
-    firebase.auth().currentUser.updateProfile({
-      displayName: newUserName
-    }).catch(function (error) {
-      showError('Falha ao atualizar o nome de usuário: ', error)
-    }).finally(function () {
-      hideItem(loading)
-    })
+  var newUserName = prompt(
+    "Informe um novo nome de usuário.",
+    userName.innerHTML
+  );
+  if (newUserName && newUserName != "") {
+    userName.innerHTML = newUserName;
+    showItem(loading);
+    firebase
+      .auth()
+      .currentUser.updateProfile({
+        displayName: newUserName,
+      })
+      .catch(function (error) {
+        showError("Falha ao atualizar o nome de usuário: ", error);
+      })
+      .finally(function () {
+        hideItem(loading);
+      });
   } else {
-    alert('O nome de usuário não pode ser vazio')
+    alert("O nome de usuário não pode ser vazio");
   }
 }
 
 // Função que permite remover contas de usuário
 function deleteUserAccount() {
-  var confirmation = confirm('Realmente deseja excluir a sua conta?')
+  var confirmation = confirm("Realmente deseja excluir a sua conta?");
   if (confirmation) {
-    showItem(loading)
-    firebase.auth().currentUser.delete().then(function () {
-      alert('Conta foi removida com sucesso')
-    }).catch(function (error) {
-      showError('Falha ao deletar sua conta: ', error)
-    }).finally(function () {
-      hideItem(loading)
-    })
+    showItem(loading);
+    firebase
+      .auth()
+      .currentUser.delete()
+      .then(function () {
+        alert("Conta foi removida com sucesso");
+      })
+      .catch(function (error) {
+        showError("Falha ao deletar sua conta: ", error);
+      })
+      .finally(function () {
+        hideItem(loading);
+      });
   }
 }
 
 //Responsável pela animação no login
-const labels = document.querySelectorAll('.form-control label')
+const labels = document.querySelectorAll(".form-control label");
 
-labels.forEach(label => {
-    label.innerHTML = label.innerText
-        .split('')
-        .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
-        .join('')
-})
+labels.forEach((label) => {
+  label.innerHTML = label.innerText
+    .split("")
+    .map(
+      (letter, idx) =>
+        `<span style="transition-delay:${idx * 50}ms">${letter}</span>`
+    )
+    .join("");
+});
