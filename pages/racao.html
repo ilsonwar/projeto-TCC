@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Ração </title>
+  <link rel="stylesheet" href="../frontend/assets/css/style.css" />
+  <link rel="stylesheet" href="../frontend/assets/css/sideBar.css">
+</head>
+
+<body>
+
+  <button type="button" class="burger" onclick="toggleSidebar()">
+    <div class="overlay"></div>
+    <img class="burger-avatar" src="../frontend/assets/images/icons/icon-burger.svg" />
+    <span class="burger-icon"></span>
+  </button>
+
+  <aside class="sidebar">
+
+    <nav class="sidebar-menu">
+      <img class="sidebar-avatar" src="../frontend/assets/images/icons/pig-ico.svg" />
+      <h3 id="lotDate"> </h3>
+      <ul>
+        <li>
+          <a id="racaoLink" href="./racao.html">Ração</a>
+        </li>
+        <li>
+          <a id="obitosLink" href="./obitos.html">Óbitos</a>
+        </li>
+        <li>
+          <a href="./resultados.html">Resultados</a>
+        </li>
+        <li>
+          <a href="./medicamentos.html">Medicamentos</a>
+        </li>
+      </ul>
+      <button class="btnSair" onclick="sair()">Sair</button>
+    </nav>
+  </aside>
+
+  <main class="racaoMain">
+    <section id="racao">
+      <div class="racao">
+        <h1>Nova entrada de ração</h1>
+        <div>
+          <label for="number">Kg:</label>
+          <input type="number" id="number" name="Quantidade" min="0" max="100">
+        </div>
+        <div class="quantidade">
+          <label for="date">Data:</label>
+          <input type="date" id="date" name="Data">
+        </div>
+        <button id="btnRacao" onclick="addRacao()">Adicionar</button>
+      </div>
+      <a href="#" class="visualizarA" onclick="openModal()">Visualizar registro</a>
+      <h2 id="total">Total: </h2>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Registros das entradas de ração</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <!-- Aqui você pode adicionar as datas de óbitos dinamicamente usando JavaScript -->
+          <li>Data 1</li>
+          <li>Data 2</li>
+          <li>Data 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--Recursos do Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+
+  <script src="../frontend/scripts/firebase.js"></script>
+  <script src="../frontend/scripts/racao.js"></script>
+  <script src="../frontend/scripts/lote.js"></script>
+
+</body>
+
+</html>

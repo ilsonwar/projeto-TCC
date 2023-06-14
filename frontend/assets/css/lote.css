@@ -1,0 +1,39 @@
+/* AUTH APRESENTAÇÃO */
+
+#container-apresentacao {
+  height: 92vh;
+  overflow: hidden;
+  text-align: center;
+  background-image: url(../images/gradient-verde.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.titulo-apresentacao {
+  margin: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.container-apresentacao {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.titulo-apresentacao img {
+  max-width: 150px;
+}
+
+@media (width <= 900px) {
+  #container-apresentacao {
+    height: 100vh;
+  }
+}

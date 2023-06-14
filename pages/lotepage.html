@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Home | Lote </title>
+  <link rel="stylesheet" href="../frontend/assets/css/style.css" />
+  <link rel="stylesheet" href="../frontend/assets/css/sideBar.css">
+</head>
+
+<body>
+
+  <button type="button" class="burger" onclick="toggleSidebar()">
+    <div class="overlay"></div>
+    <img class="burger-avatar" src="../frontend/assets/images/icons/icon-burger.svg" />
+    <span class="burger-icon"></span>
+  </button>
+
+  <aside class="sidebar">
+
+    <nav class="sidebar-menu">
+      <img class="sidebar-avatar" src="../frontend/assets/images/icons/pig-ico.svg" />
+      <h3 id="lotDate"> </h3>
+      <ul>
+        <li>
+          <a id="racaoLink" href="./racao.html">Ração</a>
+        </li>
+        <li>
+          <a id="obitosLink" href="./obitos.html">Óbitos</a>
+        </li>
+        <li>
+          <a href="./resultados.html">Resultados</a>
+        </li>
+        <li>
+          <a href="./medicamentos.html">Medicamentos</a>
+        </li>
+      </ul>
+      <button class="btnSair" onclick="sair()">Sair</button>
+    </nav>
+  </aside>
+
+
+
+  <section id="container-apresentacao">
+    <div class="container-apresentacao">
+      <div class="titulo-apresentacao">
+        <img src="../frontend/assets/images/icons/pigTitle-ico.svg" alt="">
+        <h1>O AGRO MOVE O MUNDO</h1>
+      </div>
+      <h2>Novo sistema de gerenciamento da sua granja</h2>
+      <p>A gestão adequada de uma granja de suínos em fase de terminação
+        é fundamental para garantir o sucesso do negócio, a qualidade da carne
+        produzida, a sustentabilidade e a valorização da cadeia produtiva suinícola.</p>
+    </div>
+  </section>
+
+  <script src="../frontend/scripts/lote.js"></script>
+
+</body>
+
+</html>
