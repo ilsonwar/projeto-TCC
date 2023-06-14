@@ -1,12 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
-main {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  height: 100%;
-}
-
-a {
+#register a,  #passwordReset a {
   text-decoration: underline;
   color: var(--cor-p1);
 }
