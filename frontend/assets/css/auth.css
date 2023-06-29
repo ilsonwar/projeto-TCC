@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
-#register a,  #passwordReset a {
+#register a,  #passwordReset a, #access a {
   text-decoration: underline;
-  color: var(--cor-p1);
+  color: var(--cor-p2);
 }
 
 #container-auth {
@@ -57,7 +57,7 @@
   text-align: center;
   justify-content: center;
   border-radius: 8px;
-  background-color: var(--cor-p1);
+  background-color: var(--cor-p2);
   color: var(--cor-1);
 
   font-family: "Roboto", sans-serif;
@@ -108,7 +108,7 @@
   text-align: center;
   justify-content: center;
   border-radius: 8px;
-  background-color: var(--cor-p1);
+  background-color: var(--cor-p2);
   color: var(--cor-1);
   margin-bottom: 10px;
 
@@ -141,7 +141,7 @@
 .form-control input {
   background-color: transparent;
   border: 0;
-  border-bottom: 2px var(--cor-p1) solid;
+  border-bottom: 2px var(--cor-p2) solid;
   display: block;
   width: 100%;
   padding: 15px 0;
@@ -171,6 +171,6 @@
 
 .form-control input:focus + label span,
 .form-control input:valid + label span {
-  color: var(--cor-p1);
+  color: var(--cor-p2);
   transform: translateY(-30px);
 }

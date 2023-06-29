@@ -4,7 +4,7 @@
   height: 92vh;
   overflow: hidden;
   text-align: center;
-  background-image: url(../images/gradient-verde.svg);
+  background-image: linear-gradient(to left bottom, #8ef8b7, #7eebb2, #6fdead, #61d2a8, #53c5a2, #42b49a, #32a391, #249287, #127976, #056264, #014b50, #02353c);
   background-size: cover;
   background-position: center;
 }

@@ -4,6 +4,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  
 }
 
 h1,
@@ -64,14 +65,6 @@ img[src$=".jpg"] {
   position: relative;
 }
 
-.date-input input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url("../images/icons/calendar-ico.svg") no-repeat;
-  background-size: contain;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  opacity: 0.5; /* Ajuste a opacidade conforme necessário */
-  cursor: pointer;
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #f1f1f1;
 }
