@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Ração </title>
+  <link rel="shortcut icon" href="./frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
   <link rel="stylesheet" href="../frontend/assets/css/style.css" />
   <link rel="stylesheet" href="../frontend/assets/css/sideBar.css">
 </head>
@@ -13,7 +14,7 @@
 
   <button type="button" class="burger" onclick="toggleSidebar()">
     <div class="overlay"></div>
-    <img class="burger-avatar" src="../frontend/assets/images/icons/icon-burger.svg" />
+    <img class="burger-avatar" src="../frontend/assets/images/icons/burger.svg" />
     <span class="burger-icon"></span>
   </button>
 
@@ -42,19 +43,21 @@
 
   <main class="racaoMain">
     <section id="racao">
+      <h1>Nova entrada de ração</h1>
       <div class="racao">
-        <h1>Nova entrada de ração</h1>
-        <div>
-          <label for="number">Kg:</label>
-          <input type="number" id="number" name="Quantidade" min="0" max="100">
-        </div>
-        <div class="quantidade">
-          <label for="date">Data:</label>
-          <input type="date" id="date" name="Data">
-        </div>
+        <form class="form-container">
+          <div class="quantidade-kg">
+            <label for="number">Kg:</label>
+            <input type="number" id="number" name="Quantidade" min="0" max="100">
+          </div>
+          <div>
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="Data">
+          </div>
+        </form>
         <button id="btnRacao" onclick="addRacao()">Adicionar</button>
+        <a href="#" class="visualizarA" onclick="openModal()">Visualizar registro</a>
       </div>
-      <a href="#" class="visualizarA" onclick="openModal()">Visualizar registro</a>
       <h2 id="total">Total: </h2>
     </section>
   </main>
@@ -67,12 +70,7 @@
         <button class="modal-close" onclick="closeModal()">&times;</button>
       </div>
       <div class="modal-body">
-        <ul>
-          <!-- Aqui você pode adicionar as datas de óbitos dinamicamente usando JavaScript -->
-          <li>Data 1</li>
-          <li>Data 2</li>
-          <li>Data 3</li>
-        </ul>
+        <ul id="racao-list"></ul>
       </div>
     </div>
   </div>

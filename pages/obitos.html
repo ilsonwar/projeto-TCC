@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Óbitos </title>
+  <link rel="shortcut icon" href="./frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
   <link rel="stylesheet" href="../frontend/assets/css/style.css" />
   <link rel="stylesheet" href="../frontend/assets/css/sideBar.css">
 </head>
@@ -13,7 +14,7 @@
 
   <button type="button" class="burger" onclick="toggleSidebar()">
     <div class="overlay"></div>
-    <img class="burger-avatar" src="../frontend/assets/images/icons/icon-burger.svg" />
+    <img class="burger-avatar" src="../frontend/assets/images/icons/burger.svg" />
     <span class="burger-icon"></span>
   </button>
 
@@ -49,9 +50,9 @@
           <input type="date" id="date" name="Data">
         </div>
         <button id="btnRacao" onclick="addObito()">Adicionar</button>
+        <a href="#" class="visualizarA" onclick="openModal()">Visualizar registro</a>
       </div>
-      <a href="#" class="visualizarA" onclick="openModal()">Visualizar registro</a>
-      <h2 id="total">Total: </h2>
+      <h2 id="total">Total: <span id="totalObitos">0</span></h2>
     </section>
   </main>
 

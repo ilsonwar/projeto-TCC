@@ -69,7 +69,7 @@ function fillTodoList(dataSnapshot) {
 // Redireciona para a página do lote com os dados
 function redirectToLotPage(newLoteKey, data) {
   const encodedData = encodeURIComponent(JSON.stringify(data)); // Codifica os dados do lote na URL
-  const url = new URL("http://127.0.0.1:5500/pages/lotepage.html"); // Cria a URL da página do lote
+  const url = new URL("https://gestao-granja-5f83a.firebaseapp.com/pages/lotepage.html"); // Cria a URL da página do lote
   url.searchParams.append("key", newLoteKey); // Adiciona a chave (key) como parâmetro na URL
   url.searchParams.append("data", encodedData); // Adiciona os dados (data) como parâmetro na URL
   window.location.href = url.toString(); // Redireciona para a página do lote com os parâmetros na URL
@@ -129,7 +129,7 @@ function updateTodo(key) {
 
 function sair() {
   console.log("Saindo da conta");
-  window.location.href = "http://127.0.0.1:5500/index.html";
+  window.location.href = "https://gestao-granja-5f83a.firebaseapp.com/index.html";
 }
 
 function toggleSidebar() {

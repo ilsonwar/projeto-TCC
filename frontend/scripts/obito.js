@@ -36,6 +36,14 @@ if (loteKey && loteData) {
       const obitoRef = newLoteRef.child(key + "/obitos").push();
       obitoRef.set({
         data: formattedDate,
+      })
+      .then(function() {
+        // Após adicionar o novo óbito, atualize o total de óbitos
+        updateTotalObitos();
+        alert("Óbito adicionado com sucesso!");
+      })
+      .catch(function(error) {
+        alert("Erro ao adicionar óbito: " + error.message);
       });
     } else {
       console.log("Lote inválido");
@@ -43,6 +51,30 @@ if (loteKey && loteData) {
   }
 } else {
   console.log("Não foi possível recuperar os parâmetros do localStorage");
+}
+
+function updateTotalObitos() {
+  var totalObitos = 0;
+
+  if (loteKey) {
+    let dbRefUsers = database.ref("users");
+    let obitosRef = dbRefUsers
+      .child(firebase.auth().currentUser.uid + "/lotes")
+      .child(loteKey)
+      .child("obitos");
+
+    obitosRef.once("value").then(snapshot => {
+      // Obter o número total de óbitos
+      totalObitos = snapshot.numChildren();
+
+      // Atualizar o total exibido no HTML
+      document.getElementById("totalObitos").textContent = totalObitos;
+    }).catch(error => {
+      console.log("Erro ao obter total de óbitos:", error);
+    });
+  } else {
+    console.log("Lote inválido");
+  }
 }
 
 function openModal() {
@@ -82,5 +114,5 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-// Chame a função fillLotDetails() ao carregar a página para preencher os detalhes do lote
-window.addEventListener("load", fillLotDetails);
+// Chame a função updateTotalObitos() ao carregar a página para preencher o total de óbitos
+window.addEventListener("load", updateTotalObitos);

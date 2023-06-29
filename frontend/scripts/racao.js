@@ -1,9 +1,48 @@
+
+
 // Referência ao banco de dados do Firebase
 var database = firebase.database();
 
 // Recupera a chave e os dados do lote do localStorage
 const loteKey = localStorage.getItem("loteKey");
 const loteData = JSON.parse(localStorage.getItem("loteData"));
+
+/// Função para atualizar o total no Firebase e exibir o valor total na página
+function updateTotal(key) {
+  var racaoRef;
+  
+  if (key) {
+    let dbRefUsers = database.ref("users");
+    racaoRef = dbRefUsers
+      .child(firebase.auth().currentUser.uid + "/lotes")
+      .child(key)
+      .child("racao");
+  } else {
+    racaoRef = database.ref("ração");
+  }
+
+  racaoRef.on("value", function (snapshot) {
+    var total = 0;
+
+    snapshot.forEach(function (childSnapshot) {
+      var racao = childSnapshot.val();
+      var quantidade = racao.quantidade;
+
+      if (!isNaN(parseFloat(quantidade))) {
+        total += parseFloat(quantidade);
+      }
+    });
+
+    // Atualizar o total no Firebase
+    racaoRef.update({
+      total: total.toFixed(2),
+    });
+
+    var totalElement = document.getElementById("total");
+    totalElement.textContent = "Total: " + total.toFixed(2);
+  });
+}
+  
 
 if (loteKey && loteData) {
   function addRacao() {
@@ -36,65 +75,73 @@ if (loteKey && loteData) {
       console.log(newLoteRef);
       // Criar um novo nó no banco de dados com a quantidade e a data no lote específico
       const racaoRef = newLoteRef.child(key + "/racao").push();
-      racaoRef.set({
-        quantidade: quantidade,
-        data: formattedDate,
-      });
+      racaoRef
+        .set({
+          quantidade: quantidade,
+          data: formattedDate,
+        })
+        .then(function () {
+          // Atualizar o total no Firebase
+          updateTotal(key);
+          alert("Dados adicionados com sucesso!");
+        })
+        .catch(function (error) {
+          alert("Erro ao adicionar os dados: " + error.message);
+        });
+
+      // Atualizar o total no Firebase
+      updateTotal(key);
     } else {
-      // Criar um novo nó no banco de dados com a quantidade e a data
-      var racaoRef = database.ref("racao");
-      racaoRef.push().set({
-        quantidade: quantidade,
-        data: formattedDate,
-      });
+      console.log("Lote inválido");
     }
   }
 } else {
   console.log("Não foi possível recuperar os parâmetros do localStorage");
 }
 
+// Função para abrir o modal e exibir os dados
 function openModal() {
   var modal = document.getElementById("modal");
-  var modalBody = modal.querySelector(".modal-body ul");
+  modal.style.display = "block";
 
-  // Limpar a lista de racao antes de carregar os dados do Firebase
+  var modalBody = document.getElementById("racao-list");
   modalBody.innerHTML = "";
 
+  var racaoRef;
   if (loteKey) {
     let dbRefUsers = database.ref("users");
-    let racaoRef = dbRefUsers
+    racaoRef = dbRefUsers
       .child(firebase.auth().currentUser.uid + "/lotes")
       .child(loteKey)
       .child("racao");
-
-    racaoRef.on("child_added", function (snapshot) {
-      var racao = snapshot.val();
-      var data = racao.data;
-      var quantidade = racao.quantidade;
-
-      // Adicionar um novo item à lista no modal
-      var li = document.createElement("li");
-      li.textContent = "Data: " + data + ", Quantidade: " + quantidade;
-      modalBody.appendChild(li);
-    });
   } else {
-    // Obter os dados do Firebase
-    var racaoRef = database.ref("racao");
-    racaoRef.on("child_added", function (snapshot) {
-      var racao = snapshot.val();
-      var data = racao.data;
-      var quantidade = racao.quantidade;
-
-      // Adicionar um novo item à lista no modal
-      var li = document.createElement("li");
-      li.textContent = "Data: " + data + ", Quantidade: " + quantidade;
-      modalBody.appendChild(li);
-    });
+    racaoRef = database.ref("ração");
   }
 
-  // Abrir o modal
-  modal.style.display = "block";
+  racaoRef.on("value", function (snapshot) {
+    var total = 0;
+
+    snapshot.forEach(function (childSnapshot) {
+      var racao = childSnapshot.val();
+      var data = racao.data;
+      var quantidade = racao.quantidade;
+
+      if (data !== undefined && quantidade !== undefined) {
+        var li = document.createElement("li");
+        li.textContent = "Data: " + data + ", Quantidade: " + quantidade;
+        modalBody.appendChild(li);
+
+        total += parseFloat(quantidade);
+      }
+    });
+
+    var totalElement = document.getElementById("total");
+    totalElement.textContent = "Total: " + total.toFixed(2);
+  });
+
+  updateTotal(loteKey);
 }
+
 
 // Função para fechar o modal
 function closeModal() {
@@ -102,33 +149,30 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-function calculateTotal() {
-  var racaoRef;
-  var user = firebase.auth().currentUser;
-  if (user && loteKey) {
-    let dbRefUsers = database.ref("users");
-    racaoRef = dbRefUsers
-      .child(user.uid + "/lotes")
-      .child(loteKey)
-      .child("racao");
-  } else {
-    racaoRef = database.ref("racao");
-  }
 
-  racaoRef.once("value", function (snapshot) {
-    var total = 0;
-
-    snapshot.forEach(function (childSnapshot) {
-      var racao = childSnapshot.val();
-      var quantidade = parseFloat(racao.quantidade);
-
-      total += quantidade;
-    });
-
-    var totalElement = document.getElementById("total");
-    totalElement.textContent = "Total: " + total.toFixed(2);
-  });
+// Função para fechar o modal
+function closeModal() {
+  var modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
 
-// Chame a função calculateTotal() ao carregar a página ou quando necessário
-window.addEventListener("load", calculateTotal);
+
+
+
+// Função para fechar o modal
+function closeModal() {
+  var modal = document.getElementById("modal");
+  modal.style.display = "none";
+}
+
+window.addEventListener("load", function() {
+  if (loteKey && firebase.auth().currentUser) {
+    updateTotal(loteKey); // Carregar o total ao carregar a página
+  } else {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user && loteKey) {
+        updateTotal(loteKey); // Carregar o total ao carregar a página
+      }
+    });
+  }
+});
