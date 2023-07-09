@@ -130,7 +130,7 @@ function showError(prefix, error) {
 
 // Atributos extras de configuração de e-mail
 let actionCodeSettings = {
-  url: "https://gestao-granja-5f83a.firebaseapp.com",
+  url: "http://127.0.0.1:5500",
 };
 
 let database = firebase.database();

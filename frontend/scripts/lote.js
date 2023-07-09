@@ -1,36 +1,48 @@
 // Trata a submissão do formulário de autenticação
-todoForm.onsubmit = function (event) {
-  event.preventDefault(); // Evita o redirecionamento da página
-  if (todoForm.name.value != "") {
+var todoForm;
+
+document.addEventListener("DOMContentLoaded", function() {
+  todoForm = document.getElementById("todoForm");
+  todoForm.onsubmit = function (event) {
+    event.preventDefault(); // Evita o redirecionamento da página
+
     const dataLote = document.getElementById("dataLote").value;
 
-    const dataFormatada = new Date(dataLote);
-    dataFormatada.setDate(dataFormatada.getDate() + 1);
-    const nomeLote = `Lote de ${dataFormatada.toLocaleDateString("pt-BR")}`;
+    if (dataLote != "") {
+      // Verificar se uma data foi selecionada
+      if (!dataLote) {
+        alert("Selecione uma data para o lote.");
+        return;
+      }
 
-    const data = {
-      name: nomeLote,
-      data: dataLote,
-    };
+      const dataFormatada = new Date(dataLote);
+      dataFormatada.setDate(dataFormatada.getDate() + 1);
+      const nomeLote = `Lote de ${dataFormatada.toLocaleDateString("pt-BR")}`;
 
-    const newLoteRef = dbRefUsers
-      .child(firebase.auth().currentUser.uid + "/lotes")
-      .push(); // Gera uma nova referência com ID único
+      const data = {
+        name: nomeLote,
+        data: dataLote,
+      };
 
-    newLoteRef
-      .set(data)
-      .then(function () {
-        console.log('Lote "' + nomeLote + '" adicionado com sucesso');
-      })
-      .catch(function (error) {
-        showError("Falha ao adicionar lote.", error);
-      });
+      const newLoteRef = dbRefUsers
+        .child(firebase.auth().currentUser.uid + "/lotes")
+        .push(); // Gera uma nova referência com ID único
 
-    todoForm.name.value = "";
-  } else {
-    alert("O nome do lote não pode estar em branco para criar o lote!");
-  }
-};
+      newLoteRef
+        .set(data)
+        .then(function () {
+          console.log('Lote "' + nomeLote + '" adicionado com sucesso');
+        })
+        .catch(function (error) {
+          showError("Falha ao adicionar lote.", error);
+        });
+
+      todoForm.name.value = "";
+    } else {
+      alert("O nome do lote não pode estar em branco para criar o lote!");
+    }
+  };
+});
 
 // Exibe a lista de lotes do usuário
 function fillTodoList(dataSnapshot) {
@@ -68,13 +80,30 @@ function fillTodoList(dataSnapshot) {
 
 // Redireciona para a página do lote com os dados
 function redirectToLotPage(newLoteKey, data) {
-  const encodedData = encodeURIComponent(JSON.stringify(data)); // Codifica os dados do lote na URL
-  const url = new URL("https://gestao-granja-5f83a.firebaseapp.com/pages/lotepage.html"); // Cria a URL da página do lote
-  url.searchParams.append("key", newLoteKey); // Adiciona a chave (key) como parâmetro na URL
-  url.searchParams.append("data", encodedData); // Adiciona os dados (data) como parâmetro na URL
-  window.location.href = url.toString(); // Redireciona para a página do lote com os parâmetros na URL
+  // Formata a data para o formato "dd-mm-yyyy"
+  const dataFormatada = new Date(data.data);
+  const dia = ("0" + dataFormatada.getDate()).slice(-2);
+  const mes = ("0" + (dataFormatada.getMonth() + 1)).slice(-2);
+  const ano = dataFormatada.getFullYear();
+  const dataFormatadaString = dia + "-" + mes + "-" + ano;
+
+  // Codifica os dados do lote na URL
+  const encodedData = encodeURIComponent(JSON.stringify({ ...data, data: dataFormatadaString }));
+
+  // Cria a URL da página do lote
+  const url = new URL("http://127.0.0.1:5500/pages/lotepage.html");
+  url.searchParams.append("key", newLoteKey);
+  url.searchParams.append("data", encodedData);
+
+  // Redireciona para a página do lote com os parâmetros na URL
+  window.location.href = url.toString();
+
+  // Atualiza a data do lote na barra de navegação
+  const loteDateElement = document.getElementById("loteDate");
+  loteDateElement.textContent = "Data do Lote: " + dataFormatadaString;
+
   localStorage.setItem("loteKey", newLoteKey);
-  localStorage.setItem("loteData", JSON.stringify(data));
+  localStorage.setItem("loteData", JSON.stringify({ ...data, data: dataFormatadaString }));
 }
 
 
@@ -129,10 +158,42 @@ function updateTodo(key) {
 
 function sair() {
   console.log("Saindo da conta");
-  window.location.href = "https://gestao-granja-5f83a.firebaseapp.com/index.html";
+  window.location.href = "http://127.0.0.1:5500/index.html";
 }
 
 function toggleSidebar() {
   var body = document.querySelector("body");
   body.classList.toggle("open");
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Verifica se há parâmetros na URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const loteKey = urlParams.get("key");
+  const loteDataString = urlParams.get("data");
+
+  if (loteKey && loteDataString) {
+    // Decodifica os dados do lote
+    const decodedData = JSON.parse(decodeURIComponent(loteDataString));
+    const loteData = {
+      key: loteKey,
+      data: decodedData.data,
+    };
+
+    // Atualiza a data do lote na barra de navegação
+    const loteDateElement = document.getElementById("loteDate");
+    loteDateElement.textContent = "Data do Lote: " + loteData.data;
+
+    // Armazena os dados do lote no localStorage
+    localStorage.setItem("loteKey", loteKey);
+    localStorage.setItem("loteData", JSON.stringify(loteData));
+  }
+});
+
+window.addEventListener("load", function () {
+  const loteDateElement = document.getElementById("loteDate");
+
+  if (loteData && loteData.data) {
+    loteDateElement.textContent = "Data do Lote: " + loteData.data;
+  }
+});
