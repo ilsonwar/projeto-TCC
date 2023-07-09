@@ -87,7 +87,7 @@ body.close .burger-icon {
   width: 100%;
   height: 8vh;
   padding: 35px;
-  background: var(--cor-10);
+  background: var(--cor-p3);
   opacity: 0;
   visibility: hidden;
   filter: blur(10px);
@@ -130,6 +130,7 @@ body.close .burger-icon {
     justify-items: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 20px;
   }
 
   .sidebar-menu ul {
@@ -181,6 +182,7 @@ body.open .sidebar {
   opacity: 1;
   visibility: visible;
   filter: blur(0);
+  background: var(--cor-10);
 }
 
 .sidebar-menu {
@@ -188,7 +190,6 @@ body.open .sidebar {
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  margin-top: 20px;
 }
 
 .sidebar-menu ul {

@@ -7,20 +7,24 @@
 .racaoMain {
   display: flex;
   gap: 30px;
-  height: 92%;
+  height: 92vh;
   background-color: #C1F6ED;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+
 #racao {
-  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--cor-p3);
   border: 1px solid var(--cor-p2);
   border-radius: 16px;
   padding: 20px;
-  height: 600px;
-  width: 450px;
+  height: 550px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -37,18 +41,18 @@
 
 #racao h1 {
   color: #FFF;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-family: Righteous;
   text-align: center;
 }
 
 .visualizarA {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: var(--cor-p4);
 }
 
 #racao h2 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-family: Righteous;
   color: var(--cor-1);
 }
@@ -165,6 +169,10 @@
 
 .modal-body ul li {
   margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
 /* Outros estilos */
@@ -177,19 +185,17 @@
 }
 
 /* Estilos para telas menores */
+@media (max-width: 900px) {
+  .racaoMain {
+    height: 100vh;
+    align-items: center;
+    background-color: var(--cor-p1);
+}
+}
 @media (max-width: 600px) {
 
   .racao {
     gap: 20px;
-  }
-
-  .racaoMain {
-    align-items: center;
-    background-color: var(--cor-p1);
-  }
-
-  .racaoMain {
-    height: 100vh;
   }
 
   #racao {
