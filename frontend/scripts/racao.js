@@ -94,7 +94,6 @@ function addRacao() {
       .then(function () {
         // Atualizar o total no Firebase
         updateTotal(key);
-        alert("Dados adicionados com sucesso!");
       })
       .catch(function (error) {
         alert("Erro ao adicionar os dados: " + error.message);

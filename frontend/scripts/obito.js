@@ -1,5 +1,36 @@
 // Referência ao banco de dados do Firebase
 var database = firebase.database();
+var currentUser = firebase.auth().currentUser;
+
+// Função para carregar o total de óbitos ao entrar na página
+function loadTotalObitos() {
+  var loteKey = localStorage.getItem("loteKey");
+
+  if (currentUser && loteKey) {
+    let dbRefUsers = database.ref("users");
+    let obitosRef = dbRefUsers
+      .child(currentUser.uid + "/lotes")
+      .child(loteKey)
+      .child("obitos");
+
+    obitosRef.once("value").then(function(snapshot) {
+      var totalObitos = snapshot.numChildren();
+
+      // Atualizar o total exibido no HTML
+      document.getElementById("totalObitos").textContent = totalObitos;
+    }).catch(function(error) {
+      console.log("Erro ao obter total de óbitos:", error);
+    });
+  }
+}
+
+// Chame a função para carregar o total de óbitos ao entrar na página
+window.addEventListener("DOMContentLoaded", function() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    currentUser = user;
+    loadTotalObitos();
+  });
+});
 
 const loteKey = localStorage.getItem("loteKey");
 const loteData = JSON.parse(localStorage.getItem("loteData"));
@@ -7,6 +38,11 @@ const loteData = JSON.parse(localStorage.getItem("loteData"));
 if (loteKey && loteData) {
   function addObito() {
     var obitoData = document.getElementById("date").value;
+
+    if (!obitoData) {
+      alert("Selecione uma data para o óbito.");
+      return;
+    }
 
     // Usar a chave (id do lote) armazenada no localStorage
     var key = loteKey;
@@ -18,63 +54,49 @@ if (loteKey && loteData) {
     console.log(key);
 
     // Formatar a data para dd-mm-yyyy
-    var formattedDate = new Date(obitoData).toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+    var dataFormatada = new Date(obitoData);
+    var formattedDate =
+      ("0" + dataFormatada.getDate()).slice(-2) +
+      "-" +
+      ("0" + (dataFormatada.getMonth() + 1)).slice(-2) +
+      "-" +
+      dataFormatada.getFullYear();
 
     // Verificar se o loteId é válido (se necessário)
     if (key) {
       let dbRefUsers = database.ref("users");
       let newLoteRef = dbRefUsers.child(
-        firebase.auth().currentUser.uid + "/lotes"
+        currentUser.uid + "/lotes"
       );
 
       console.log(newLoteRef);
       // Criar um novo nó no banco de dados com a data no lote específico
       const obitoRef = newLoteRef.child(key + "/obitos").push();
-      obitoRef.set({
-        data: formattedDate,
-      })
-      .then(function() {
-        // Após adicionar o novo óbito, atualize o total de óbitos
-        updateTotalObitos();
-        alert("Óbito adicionado com sucesso!");
-      })
-      .catch(function(error) {
-        alert("Erro ao adicionar óbito: " + error.message);
-      });
+      obitoRef
+        .set({
+          data: formattedDate,
+        })
+        .then(function() {
+          alert("Óbito adicionado com sucesso!");
+
+          // Limpar o campo de data
+          document.getElementById("date").value = "";
+
+          // Fechar o modal
+          closeModal();
+
+          // Atualizar o total de óbitos
+          loadTotalObitos();
+        })
+        .catch(function(error) {
+          alert("Erro ao adicionar óbito: " + error.message);
+        });
     } else {
       console.log("Lote inválido");
     }
   }
 } else {
   console.log("Não foi possível recuperar os parâmetros do localStorage");
-}
-
-function updateTotalObitos() {
-  var totalObitos = 0;
-
-  if (loteKey) {
-    let dbRefUsers = database.ref("users");
-    let obitosRef = dbRefUsers
-      .child(firebase.auth().currentUser.uid + "/lotes")
-      .child(loteKey)
-      .child("obitos");
-
-    obitosRef.once("value").then(snapshot => {
-      // Obter o número total de óbitos
-      totalObitos = snapshot.numChildren();
-
-      // Atualizar o total exibido no HTML
-      document.getElementById("totalObitos").textContent = totalObitos;
-    }).catch(error => {
-      console.log("Erro ao obter total de óbitos:", error);
-    });
-  } else {
-    console.log("Lote inválido");
-  }
 }
 
 function openModal() {
@@ -84,24 +106,51 @@ function openModal() {
   // Limpar a lista de óbitos antes de carregar os dados do Firebase
   modalBody.innerHTML = "";
 
-  if (loteKey) {
+  if (currentUser && loteKey) {
     let dbRefUsers = database.ref("users");
     let obitosRef = dbRefUsers
-      .child(firebase.auth().currentUser.uid + "/lotes")
+      .child(currentUser.uid + "/lotes")
       .child(loteKey)
       .child("obitos");
 
-    obitosRef.on("child_added", function (snapshot) {
-      var obito = snapshot.val();
-      var data = obito.data;
+    obitosRef
+      .once("value")
+      .then(function(snapshot) {
+        var obitos = snapshot.val();
+        if (obitos) {
+          Object.keys(obitos).forEach(function(obitoKey) {
+            var obito = obitos[obitoKey];
+            var data = obito.data;
 
-      // Adicionar um novo item à lista no modal
-      var li = document.createElement("li");
-      li.textContent = "Data: " + data;
-      modalBody.appendChild(li);
-    });
+            // Adicionar um novo item à lista no modal
+            var li = document.createElement("li");
+            li.setAttribute("id", "obito-" + obitoKey);
+            li.textContent = "Data: " + data;
+            modalBody.appendChild(li);
+
+            // Botão para remover o óbito
+            var removeButton = document.createElement("img");
+            removeButton.src = "../../frontend/assets/images/icons/trash.svg";
+            removeButton.setAttribute(
+              "onclick",
+              'removeObito("' + obitoKey + '")'
+            );
+            removeButton.setAttribute("class", "remove-button");
+            li.appendChild(removeButton);
+          });
+
+          // Obter o número total de óbitos
+          var totalObitos = snapshot.numChildren();
+
+          // Atualizar o total exibido no HTML
+          document.getElementById("totalObitos").textContent = totalObitos;
+        }
+      })
+      .catch(function(error) {
+        console.log("Erro ao obter registros de óbitos:", error);
+      });
   } else {
-    console.log("Lote inválido");
+    console.log("Usuário não autenticado ou loteKey inválido");
   }
 
   // Abrir o modal
@@ -114,5 +163,30 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-// Chame a função updateTotalObitos() ao carregar a página para preencher o total de óbitos
-window.addEventListener("load", updateTotalObitos);
+function removeObito(obitoKey) {
+  if (confirm("Deseja realmente excluir este registro de óbito?")) {
+    let dbRefUsers = database.ref("users");
+    let obitoRef = dbRefUsers
+      .child(currentUser.uid + "/lotes")
+      .child(loteKey)
+      .child("obitos")
+      .child(obitoKey);
+
+    obitoRef
+      .remove()
+      .then(function() {
+        // Remover o elemento visualmente
+        var obitoElement = document.getElementById("obito-" + obitoKey);
+        if (obitoElement) {
+          obitoElement.parentNode.removeChild(obitoElement);
+        }
+
+        // Atualizar o total de óbitos
+        loadTotalObitos();
+        alert("Registro de óbito excluído com sucesso!");
+      })
+      .catch(function(error) {
+        alert("Erro ao excluir registro de óbito: " + error.message);
+      });
+  }
+}
