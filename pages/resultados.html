@@ -5,16 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Resultados </title>
-  <link rel="shortcut icon" href="./frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="../frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
   <link rel="stylesheet" href="../frontend/assets/css/style.css" />
   <link rel="stylesheet" href="../frontend/assets/css/sideBar.css">
+  <link rel="stylesheet" href="../frontend/assets/css/racao.css">
 </head>
 
 <body>
 
   <button type="button" class="burger" onclick="toggleSidebar()">
     <div class="overlay"></div>
-    <img class="burger-avatar" src="../frontend/assets/images/icons/burger.svg" />
+    <img class="burger-avatar no-print" src="../frontend/assets/images/icons/burger.svg" />
     <span class="burger-icon"></span>
   </button>
 
@@ -41,6 +42,56 @@
     </nav>
   </aside>
 
+  <main class="racaoMain">
+    <section id="racao">
+
+      <div class="racao">
+        <h1>Resultados</h1>
+        <div class="resultados">
+          <p>Quantidade de Leitões entrada: <span id="quantidadeLeitoes"></span></p>
+          <p>Quantidade de Leitões Vivos: <span id="quantidadeLeitoesResultado"></span></p>
+          <p>Total suinos mortos: <span id="totalObitos"> </span></p>
+          <p>Total ração consumida: <span id="totalRacaoResultado"> </span></p>
+          <p>Peso total entrada: <span id="pesoEntrada"> </span></p>
+          <p>Peso total saída: <span id="pesoSaida"> </span></p>
+          <p>Peso ganho: <span id="pesoGanho"> </span></p>
+          <p>C.A: <span id="ganhoDePesoResultado"> </span></p>
+        </div>
+
+        <form id="pesoMedioForm" class="no-print">
+          <form id="pesoMedioForm">
+            <label for="pesoMedioLeitoes">Peso Médio de um Leitão (kg):</label>
+            <input type="number" id="pesoMedioLeitoes" name="pesoAtualLeitoes" step="0.01" required>
+            <button type="submit" id="submitPesoMedioForm">Adicionar</button>
+          </form>
+          <a id="imprimirRelatorio" class="no-print visualizarA">Imprimir Relatório <img src="../frontend/assets/images/icons/print.svg" alt=""></a>
+
+      </div>
+    </section>
+  </main>
+
+
+
+
+
+
+  <!-- Na página de resultados -->
+
+
+
+
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+  <script src="../frontend/scripts/firebase.js"></script>
+  <script src="../frontend/scripts/auth.js"></script>
+  <script src="../frontend/scripts/obito.js"></script>
+  <script src="../frontend/scripts/resultados.js"></script>
   <script src="../frontend/scripts/lote.js"></script>
 
 </body>
