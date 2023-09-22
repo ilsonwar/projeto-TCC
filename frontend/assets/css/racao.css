@@ -23,7 +23,7 @@
   border: 1px solid var(--cor-p2);
   border-radius: 16px;
   padding: 20px;
-  height: 550px;
+  height: 510px;
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -35,9 +35,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
   text-align: center;
+  flex: 1;
+  max-height: 100%; 
+  justify-content: space-evenly;
 }
+
+.resultados{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.resultados p{
+  color: #ccc;
+}
+
+.resultados span{
+  color: var(--cor-p4);
+}
+
+#ganhoDePesoResultado{
+  font-size: 1.3rem;
+}
+
 
 #racao h1 {
   color: #FFF;
@@ -49,6 +72,8 @@
 .visualizarA {
   font-size: 1.1rem;
   color: var(--cor-p4);
+  display: flex;
+  gap: 10px;
 }
 
 #racao h2 {
@@ -67,11 +92,12 @@
 }
 
 #number,
+#pesoMedioLeitoes,
 #kg {
   border: none;
   border-bottom: 1px solid var(--cor-1);
   border-radius: 6px;
-  width: 150px; /* Ajuste a largura conforme necessário */
+  width: 140px; /* Ajuste a largura conforme necessário */
   height: 30px;
   font-size: 1rem;
   color: var(--cor-1);
@@ -101,7 +127,7 @@
   text-align: center;
 }
 
-#btnRacao {
+#btnRacao{
   background-color: transparent;
   color: #fff;
   border: 1px solid #fff;
@@ -114,6 +140,21 @@
   margin-bottom: 20px;
   font-size: 1rem;
   font-weight: bolder;
+}
+
+#submitPesoMedioForm{
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 0.8rem;
+  font-weight: bolder;
+  margin-left: 20px ;
 }
 
 /* Estilos para o modal */
@@ -209,6 +250,7 @@
 
   .visualizarA {
     font-size: 1rem;
+
   }
 
   #racao h2 {
@@ -233,5 +275,11 @@
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none;
   }
 }
