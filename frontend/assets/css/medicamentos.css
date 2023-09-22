@@ -1,0 +1,30 @@
+#listaMedicamentos{
+background-color: #1c383d;
+padding: 20px;
+align-items: center;
+display: grid;
+grid-auto-columns: 2;
+grid-template-columns: 1fr 1fr;
+border-radius: 10px;
+gap: 20px;
+height: 100%;
+}
+
+.medicamentos{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+#adicionarMedicamentoBtn{
+background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    width: 200px;
+    height: 60px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bolder;
+}

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Medicamentos </title>
-  <link rel="shortcut icon" href="./frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="../frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
   <link rel="stylesheet" href="../frontend/assets/css/style.css" />
   <link rel="stylesheet" href="../frontend/assets/css/sideBar.css">
 </head>
@@ -41,7 +41,51 @@
     </nav>
   </aside>
 
+  <!-- Modal para adicionar medicamento -->
+  <div id="medicamentoModal" class="modal">
+    <div class="modal-content">
+      <span class="fecharModal" id="fecharModal">&times;</span>
+      <h2>Adicionar Medicamento</h2>
+      <form id="medicamentoForm">
+        <label for="nomeMedicamento">Nome do Medicamento:</label>
+        <input type="text" id="nomeMedicamento" required>
+
+        <label for="dosagem">Dosagem:</label>
+        <input type="text" id="dosagem" required>
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" required>
+
+        <label for="carenciaAbate">Carência abate:</label>
+        <input type="text" id="carenciaAbate" required>
+
+        <button type="submit">Adicionar</button>
+      </form>
+    </div>
+  </div>
+
+  <main class="racaoMain">
+    <section id="racao">
+      <div class="medicamentos">
+        <button id="adicionarMedicamentoBtn">Adicionar Medicamento</button>
+        <!-- Lista de medicamentos -->
+        <ul id="listaMedicamentos"></ul>
+      </div>
+
+    </section>
+  </main>
+
+
+  <!--Recursos do Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+
+  <script src="../frontend/scripts/firebase.js"></script>
+  <script src="../frontend/scripts/auth.js"></script>
   <script src="../frontend/scripts/lote.js"></script>
+  <script src="../frontend/scripts/medicamentos.js"></script>
 
 </body>
 
