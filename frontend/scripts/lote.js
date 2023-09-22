@@ -1,46 +1,55 @@
 // Trata a submissão do formulário de autenticação
 var todoForm;
+var totalVivos; // Inicialize a variável global totalVivos
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   todoForm = document.getElementById("todoForm");
   todoForm.onsubmit = function (event) {
     event.preventDefault(); // Evita o redirecionamento da página
 
     const dataLote = document.getElementById("dataLote").value;
+    const quantidadeLeitoes =
+      document.getElementById("quantidadeLeitoes").value; // Converter para número
+    const pesoMedioLeitoes = document.getElementById("pesoMedioLeitoes").value; // Converter para número
 
-    if (dataLote != "") {
-      // Verificar se uma data foi selecionada
-      if (!dataLote) {
-        alert("Selecione uma data para o lote.");
-        return;
-      }
-
-      const dataFormatada = new Date(dataLote);
-      dataFormatada.setDate(dataFormatada.getDate() + 1);
-      const nomeLote = `Lote de ${dataFormatada.toLocaleDateString("pt-BR")}`;
-
-      const data = {
-        name: nomeLote,
-        data: dataLote,
-      };
-
-      const newLoteRef = dbRefUsers
-        .child(firebase.auth().currentUser.uid + "/lotes")
-        .push(); // Gera uma nova referência com ID único
-
-      newLoteRef
-        .set(data)
-        .then(function () {
-          console.log('Lote "' + nomeLote + '" adicionado com sucesso');
-        })
-        .catch(function (error) {
-          showError("Falha ao adicionar lote.", error);
-        });
-
-      todoForm.name.value = "";
-    } else {
-      alert("O nome do lote não pode estar em branco para criar o lote!");
+    if (!dataLote) {
+      alert("Selecione uma data para o lote.");
+      return;
     }
+
+    const dataFormatada = new Date(dataLote);
+    dataFormatada.setDate(dataFormatada.getDate() + 1);
+    const nomeLote = `Lote de ${dataFormatada.toLocaleDateString("pt-BR")}`;
+
+    // Inicialize totalVivos com a quantidade de leitões
+    totalVivos = parseInt(quantidadeLeitoes);
+
+    // Aqui, você pode salvar os dados diretamente no Firebase
+    const data = {
+      name: nomeLote,
+      data: dataLote,
+      quantidadeLeitoes: quantidadeLeitoes,
+      pesoMedioLeitoes: pesoMedioLeitoes,
+      totalVivos: totalVivos // totalVivos é inicializado aqui
+    };
+
+    const newLoteRef = dbRefUsers
+      .child(firebase.auth().currentUser.uid + "/lotes")
+      .push(); // Gera uma nova referência com ID único
+
+    newLoteRef
+      .set(data)
+      .then(function () {
+        console.log('Lote "' + nomeLote + '" adicionado com sucesso');
+      })
+      .catch(function (error) {
+        showError("Falha ao adicionar lote.", error);
+      });
+
+    // Limpa os campos do formulário após a submissão
+    document.getElementById("dataLote").value = "";
+    document.getElementById("quantidadeLeitoes").value = "";
+    document.getElementById("pesoMedioLeitoes").value = "";
   };
 });
 
@@ -78,8 +87,7 @@ function fillTodoList(dataSnapshot) {
   });
 }
 
-// Redireciona para a página do lote com os dados
-function redirectToLotPage(newLoteKey, data) {
+function redirectToLotPage(key, data) {
   // Formata a data para o formato "dd-mm-yyyy"
   const dataFormatada = new Date(data.data);
   const dia = ("0" + dataFormatada.getDate()).slice(-2);
@@ -92,20 +100,12 @@ function redirectToLotPage(newLoteKey, data) {
 
   // Cria a URL da página do lote
   const url = new URL("http://127.0.0.1:5500/pages/lotepage.html");
-  url.searchParams.append("key", newLoteKey);
+  url.searchParams.append("key", key);
   url.searchParams.append("data", encodedData);
 
   // Redireciona para a página do lote com os parâmetros na URL
   window.location.href = url.toString();
-
-  // Atualiza a data do lote na barra de navegação
-  const loteDateElement = document.getElementById("loteDate");
-  loteDateElement.textContent = "Data do Lote: " + dataFormatadaString;
-
-  localStorage.setItem("loteKey", newLoteKey);
-  localStorage.setItem("loteData", JSON.stringify({ ...data, data: dataFormatadaString }));
 }
-
 
 
 // Remove uma tarefa
@@ -166,7 +166,7 @@ function toggleSidebar() {
   body.classList.toggle("open");
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Verifica se há parâmetros na URL
   const urlParams = new URLSearchParams(window.location.search);
   const loteKey = urlParams.get("key");

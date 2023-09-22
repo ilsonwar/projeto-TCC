@@ -5,7 +5,19 @@ var database = firebase.database();
 const loteKey = localStorage.getItem("loteKey");
 const loteData = JSON.parse(localStorage.getItem("loteData"));
 
-/// Função para atualizar o total no Firebase e exibir o valor total na página
+window.addEventListener("load", function () {
+  if (loteKey && firebase.auth().currentUser) {
+    updateTotal(loteKey); // Carregar o total ao carregar a página
+  } else {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user && loteKey) {
+        updateTotal(loteKey); // Carregar o total ao carregar a página
+      }
+    });
+  }
+});
+
+// Função para atualizar o total no Firebase e exibir o valor total na página
 function updateTotal(key) {
   var racaoRef;
 
@@ -41,6 +53,7 @@ function updateTotal(key) {
   });
 }
 
+
 function addRacao() {
   var quantidade = document.getElementById("number").value;
   var racaoData = document.getElementById("date").value;
@@ -69,16 +82,15 @@ function addRacao() {
   // Formatar a data para dd-mm-yyyy
   var dataFormatada = new Date(racaoData);
   formattedDate =
-  ("0" + dataFormatada.getUTCDate()).slice(-2) +
-  "-" +
-  ("0" + (dataFormatada.getUTCMonth() + 1)).slice(-2) +
-  "-" +
-  dataFormatada.getUTCFullYear();
-
+    ("0" + dataFormatada.getUTCDate()).slice(-2) +
+    "-" +
+    ("0" + (dataFormatada.getUTCMonth() + 1)).slice(-2) +
+    "-" +
+    dataFormatada.getUTCFullYear();
 
   // Verificar se o loteId é válido (se necessário)
   if (key) {
-    let dbRefUsers = database.ref("users");
+  let dbRefUsers = database.ref("users");
     let newLoteRef = dbRefUsers.child(
       firebase.auth().currentUser.uid + "/lotes"
     );
@@ -207,14 +219,4 @@ function closeModal() {
   }
 }
 
-window.addEventListener("load", function () {
-  if (loteKey && firebase.auth().currentUser) {
-    updateTotal(loteKey); // Carregar o total ao carregar a página
-  } else {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user && loteKey) {
-        updateTotal(loteKey); // Carregar o total ao carregar a página
-      }
-    });
-  }
-});
+
