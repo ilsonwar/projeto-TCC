@@ -1,4 +1,5 @@
 // Trata a submissão do formulário de autenticação
+// Trata a submissão do formulário de autenticação
 var todoForm;
 var totalVivos; // Inicialize a variável global totalVivos
 
@@ -8,9 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault(); // Evita o redirecionamento da página
 
     const dataLote = document.getElementById("dataLote").value;
-    const quantidadeLeitoes =
-      document.getElementById("quantidadeLeitoes").value; // Converter para número
-    const pesoMedioLeitoes = document.getElementById("pesoMedioLeitoes").value; // Converter para número
+    const quantidadeLeitoes = document.getElementById("quantidadeLeitoes").value; // Converter para número
+    const pesoMedioLeitoes = document.getElementById("pesoMedioLeitoesEntrada").value; // Converter para número
 
     if (!dataLote) {
       alert("Selecione uma data para o lote.");
@@ -40,9 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
     newLoteRef
       .set(data)
       .then(function () {
+        alert('Lote "' + nomeLote + '" adicionado com sucesso'); // Exibe um alerta de sucesso
         console.log('Lote "' + nomeLote + '" adicionado com sucesso');
       })
       .catch(function (error) {
+        alert("Falha ao adicionar lote. Erro: " + error.message); // Exibe um alerta de erro
         showError("Falha ao adicionar lote.", error);
       });
 
@@ -53,12 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 
+
 // Exibe a lista de lotes do usuário
 function fillTodoList(dataSnapshot) {
   ulTodoList.innerHTML = "";
 
   let num = dataSnapshot.numChildren();
-  todoCount.innerHTML = num + (num > 1 ? " Lotes" : " Lote") + ":"; // Exibe na interface o número de lotes
+  console.log(num); // Adicione esta linha para depurar
+
+  let message = num === 1 ? " Lote" : " Lotes";
+  todoCount.innerHTML = num + message + ":";
 
   dataSnapshot.child("lotes").forEach(function (item) {
     let value = item.val();
@@ -99,7 +105,7 @@ function redirectToLotPage(key, data) {
   const encodedData = encodeURIComponent(JSON.stringify({ ...data, data: dataFormatadaString }));
 
   // Cria a URL da página do lote
-  const url = new URL("http://127.0.0.1:5500/pages/lotepage.html");
+  const url = new URL("https://gestao-granja-5f83a.firebaseapp.com/pages/lotepage.html");
   url.searchParams.append("key", key);
   url.searchParams.append("data", encodedData);
 
@@ -158,7 +164,7 @@ function updateTodo(key) {
 
 function sair() {
   console.log("Saindo da conta");
-  window.location.href = "http://127.0.0.1:5500/index.html";
+  window.location.href = "https://gestao-granja-5f83a.firebaseapp.com/index.html";
 }
 
 function toggleSidebar() {
@@ -197,3 +203,28 @@ window.addEventListener("load", function () {
     loteDateElement.textContent = "Data do Lote: " + loteData.data;
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Event listener para o botão "Adicionar Lote" em telas menores que 600px
+  const abrirModalButton = document.getElementById("abrirModalAdicionarLoteMobile");
+  abrirModalButton.addEventListener("click", function () {
+    // Abre o modal de adicionar lote
+    const modalAdicionarLote = document.getElementById("modalAdicionarLote");
+    modalAdicionarLote.style.display = "block";
+    
+    // Define o background-color do body
+    document.body.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  });
+
+  // Event listener para fechar o modal
+  const fecharModalButton = document.getElementById("fecharModalAdicionarLote");
+  fecharModalButton.addEventListener("click", function () {
+    // Fecha o modal de adicionar lote
+    const modalAdicionarLote = document.getElementById("modalAdicionarLote");
+    modalAdicionarLote.style.display = "none";
+    
+    // Restaura o background-color do body
+    document.body.style.backgroundColor = ""; // Isso irá remover a cor de fundo definida
+  });
+});
+

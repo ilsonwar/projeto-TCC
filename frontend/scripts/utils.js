@@ -14,7 +14,7 @@ let passwordReset = document.getElementById("passwordReset");
 let userName = document.getElementById("userName");
 let userImg = document.getElementById("userImg");
 
-var todoForm = document.getElementById("todoForm");
+// var todoForm = document.getElementById("todoForm");
 var todoCount = document.getElementById("todoCount");
 var ulTodoList = document.getElementById("ulTodoList");
 
@@ -257,7 +257,7 @@ function signInWithGoogle() {
 
 // Atributos extras de configuração de e-mail
 let actionCodeSettings = {
-  url: "http://127.0.0.1:5500",
+  url: "https://gestao-granja-5f83a.firebaseapp.com",
 };
 
 let database = firebase.database();

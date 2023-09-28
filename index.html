@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Protótipo</title>
+  <title>Gestão granja</title>
   <link rel="shortcut icon" href="./frontend/assets/images/icons/pig-ico.svg" type="image/x-icon">
   <link rel="stylesheet" href="./frontend/assets/css/style.css" />
 </head>
@@ -104,43 +104,50 @@
         <hr>
 
         <div class="center">
-          <!--Formulário de tarefas-->
-          <h3 id="todoFormTitle">Adicionar lote:</h3>
-          <form id="todoForm">
-            <div>
-              <label for="name">Data: </label>
-              <input type="date" id="dataLote" placeholder="Tarefa" required>
-            </div>
-            <div>
-              <label for="quantidadeLeitoes">Quantidade: </label>
-              <input type="number" id="quantidadeLeitoes" name="quantidadeLeitoes" placeholder="Quantidade de leitões" required>
-            </div>
-            <div>
-              <label for="pesoMedioLeitoes">Peso: </label>
-              <input type="number" id="pesoMedioLeitoes" name="pesoMedioLeitoes" placeholder="Peso médio dos leitões" required>
-            </div>
-
-            <button type="submit" id="submitTodoForm">Adicionar</button>
-          </form>
+          <!-- Botão para abrir o modal em dispositivos móveis -->
+          <button id="abrirModalAdicionarLoteMobile" class="mobile-only">Adicionar Lote</button>
         </div>
-      </div>
+      
+        <!-- Modal de adicionar lote -->
+        <div id="modalAdicionarLote" class="modal">
+          <div class="modal-content">
+            <div class="modalForm">
+              <h3 id="modalFormTitle">Adicionar lote:</h3>
+              <span class="fecharModal" id="fecharModalAdicionarLote">&times;</span>
+            </div>
+            <form id="todoForm">
+              <div class="boxLote">
+                <label for="name">Data: </label>
+                <input type="date" id="dataLote" placeholder="Tarefa" required>
+              </div>
+              <div class="boxLote">
+                <label for="quantidadeLeitoes">Quantidade: </label>
+                <input type="number" id="quantidadeLeitoes" name="quantidadeLeitoes" placeholder="Quantidade de leitões" required>
+              </div>
+              <div class="boxLote">
+                <label for="pesoMedioLeitoes">Peso: </label>
+                <input type="number" id="pesoMedioLeitoesEntrada" name="pesoMedioLeitoes" placeholder="Peso médio dos leitões" required>
+              </div>
+  
+              <button type="submit" id="submitTodoForm">Adicionar</button>
+            </form>
+          </div>
+        </div>      
 
-    </div>
+        <!--Recursos do Firebase-->
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
 
-    <!--Recursos do Firebase-->
-    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 
-    <!--Nossa programação em JavaScript-->
-    <script src="../frontend/scripts/firebase.js"></script>
-    <script src="../frontend/scripts/utils.js"></script>
-    <script src="../frontend/scripts/auth-custom.js"></script>
-    <script src="../frontend/scripts/auth.js"></script>
-    <script src="../frontend/scripts/lote.js"></script>
+        <!--Nossa programação em JavaScript-->
+        <script src="../frontend/scripts/firebase.js"></script>
+        <script src="../frontend/scripts/utils.js"></script>
+        <script src="../frontend/scripts/auth-custom.js"></script>
+        <script src="../frontend/scripts/auth.js"></script>
+        <script src="../frontend/scripts/lote.js"></script>
 
 </body>
 

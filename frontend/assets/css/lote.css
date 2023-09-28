@@ -10,11 +10,9 @@
 }
 
 .titulo-apresentacao {
-  margin: 30px 60px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
   align-items: center;
   margin-bottom: 100px;
 }
@@ -24,7 +22,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
 }
 
@@ -32,8 +30,89 @@
   max-width: 150px;
 }
 
+.apresentacao{
+  display: grid;
+  grid-template-columns: 1 fr;
+  gap: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 @media (width <= 900px) {
   #container-apresentacao {
     height: 100vh;
   }
+
+  .apresentacao{
+    max-width: 400px;
+    padding: 20px;
+  }
+}
+
+/* -------------- */
+
+
+
+/* Estilos para dispositivos móveis */
+.modalForm{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* Estilos para o modal */
+ .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+
+
+.modal-content {
+  background-color: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para os campos do formulário */
+.boxLote {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+input[type="date"],
+input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* Estilos para o botão "Adicionar Lote" em telas menores que 600px */
+#abrirModalAdicionarLoteMobile,
+#submitTodoForm{
+  display: block;
+  background-color: var(--cor-p2);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 20px auto;
 }

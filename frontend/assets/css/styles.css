@@ -1,6 +1,6 @@
 #app {
-  width: 400px;
-  max-height: 100vh;
+  width: 350px;
+  max-height: 600px;
   margin: auto;
   box-shadow: 4px 4px 20px #888;
   padding: 20px;
@@ -14,9 +14,12 @@
   transform: translate(-50%, -50%);
 }
 
+#access{
+  margin-bottom: 20px;
+}
+
 .center {
   text-align: center;
-  align-items: center;
 }
 
 .startHidden {
@@ -26,18 +29,6 @@
 h3 {
   margin: 4px;
   font-weight: normal;
-}
-
-#submitTodoForm {
-  background-color: #4c4;
-  font-size: 15px;
-  color: white;
-  padding: 8px;
-  margin: 4px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  margin: auto;
 }
 
 button:hover {
@@ -72,7 +63,7 @@ p {
   position: relative;
   top: calc(50% - 100px);
   left: calc(50% - 130px);
-  z-index: 1;
+  z-index: 999;
 }
 
 #auth img {
@@ -90,6 +81,21 @@ p {
 
 #todoList {
   overflow-y: auto;
+  max-height: 150px;
+  padding: 0px 10px;
+}
+
+.boxLote{
+  display: flex;
+  flex-direction: column;
+}
+
+.boxLote label{
+  align-self: flex-start;
+}
+
+.boxLote input{
+  align-self: flex-end;
 }
 
 #todoForm{
@@ -99,13 +105,10 @@ p {
   align-content: space-around;
   margin: 16px 0 16px 0;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
-  overflow-y: auto;
   max-height: 300px;
 }
 
@@ -196,17 +199,5 @@ ul {
 
   #emailVerified {
     display: none;
-  }
-
-  #dataLote {
-    height: 25px;
-    width: 100px;
-    border-radius: 6px;
-    border: 1px solid var(--cor-12);
-    font-size: 0.8rem;
-  }
-
-  #submitTodoForm {
-    height: 30px;
   }
 }
