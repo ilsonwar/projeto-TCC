@@ -150,7 +150,7 @@ function atualizarListaMedicamentos() {
 
     // Crie um elemento de imagem para o ícone de remoção
     var removerImg = document.createElement("img");
-    removerImg.src = "../../frontend/assets/images/icons/delete.svg"; // Substitua com o caminho correto para o seu ícone
+    removerImg.src = "../../frontend/assets/images/icons/trash.svg"; // Substitua com o caminho correto para o seu ícone
 
     // Configure o evento de clique para remover o medicamento
     removerImg.addEventListener("click", function () {

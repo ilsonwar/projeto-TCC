@@ -122,7 +122,6 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   align-items: center;
   text-align: center;
 }
@@ -187,19 +186,6 @@
 .modal-header h3 {
   margin: 0;
   color: #000;
-}
-
-.modal-close {
-  cursor: pointer;
-  font-size: 24px;
-  font-weight: bold;
-  color: #aaa;
-  border: none;
-  background-color: transparent;
-}
-
-.modal-close:hover {
-  color: #555;
 }
 
 .modal-body ul {
@@ -275,6 +261,10 @@
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
+  }
+
+  .modal-header h3{
+    font-size: 1.3rem;
   }
 }
 

@@ -1,30 +1,109 @@
-#listaMedicamentos{
-background-color: #1c383d;
-padding: 20px;
-align-items: center;
-display: grid;
-grid-auto-columns: 2;
-grid-template-columns: 1fr 1fr;
-border-radius: 10px;
-gap: 20px;
-height: 100%;
+#listaMedicamentos {
+  max-width: 100%;
+  height: 100%;
+  background-color: #1c383d;
+  align-items: center;
+  display: grid;
+  grid-auto-columns: 2;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 10px;
+  overflow: auto;
 }
 
-.medicamentos{
+#listaMedicamentos li{
+  padding: 15px;
+  color: var(--cor-5);
+  margin-bottom: 10px;
+}
+
+#listaMedicamentos li strong{
+  color: var(--cor-1);
+}
+
+#listaMedicamentos li img{
+  cursor: pointer;
+}
+
+.medicamentos {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
 }
 
+.fecharModal {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s; 
+  background-color: transparent;
+  z-index: 0; 
+}
+
+.fecharModal:hover {
+color: black;
+}
+
 #adicionarMedicamentoBtn{
-background-color: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    width: 200px;
-    height: 60px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: bolder;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  width: 200px;
+  height: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bolder;
+}
+
+#adicionarMedicamento {
+  background-color: transparent;
+  color: var(--cor-1);
+  background-color: var(--cor-p2);
+  border: 1px solid var(--cor-p3);
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bolder;
+  margin-top: 40px;
+  margin: auto;
+}
+
+.boxMedicamento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boxMedicamento input {
+  border: none;
+  border-bottom: 1px solid var(--cor-10);
+  border-radius: 6px;
+  width: 140px;
+  height: 20px;
+  font-size: 1rem;
+  color: var(--cor-8);
+  padding: 0 10px;
+  box-sizing: border-box;
+  
+}
+
+#medicamentoForm{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+
+.adicionarMedicamento{
+  display: flex;
+  justify-content: space-between;
 }

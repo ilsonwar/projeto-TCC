@@ -1,7 +1,6 @@
 
 firebase.auth().languageCode = "pt-BR";
-const persistence = firebase.auth.Auth.Persistence.LOCAL;
-
+hideItem(loading);
     // Função que centraliza e trata a autenticação
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
